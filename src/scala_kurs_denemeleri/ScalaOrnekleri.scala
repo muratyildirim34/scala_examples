@@ -201,7 +201,9 @@ object ScalaOrnekleri extends App{
   val numbers = List(1,2,3,4)
   val chars = List('a','b','c','d')
 
-  println(chars.flatMap(x => numbers.map(y => x + "-" + y)))
+  println(chars.flatMap(x => numbers.map( y => { if(y % 2 == 0) y + " - " + x})))
+
+  println(chars.flatMap(x => numbers.map( y => { if(y % 2 == 0) y + " - " + x})).filter(_ != ()))
 
   val combination = for {
     n <- numbers if n % 2 == 0
@@ -210,5 +212,28 @@ object ScalaOrnekleri extends App{
 
   println(combination)
 
+  import scala.collection.mutable.ListBuffer
+
+  var fileList = new ListBuffer[Int]
+
+  fileList = ListBuffer(1,2,2,2,3,3,4,5)
+
+  var fileList2 =  new ListBuffer[Int]
+
+  fileList.foreach(x => {
+    if (!fileList2.contains(x)) {
+      fileList2 += x
+    }
+  })
+  println(fileList)
+  println(fileList2)
+
+  def factorial_test(x: Int): BigInt = (2 to x).reduce(_ * _)
+
+  println(s"burada ${factorial_test(17)}")
+
+  println(fileList)
+  println(fileList.foldLeft(3)(_+_))
+  println(fileList.foldLeft(0)(_*_))
 
 }
